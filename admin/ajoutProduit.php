@@ -6,16 +6,33 @@ if (!empty($_POST)): // si le formulaire a été soumis
 
     if (!empty($_FILES['picture']['name'])):
 
+//    debug($_FILES);
+//       die;
+
+    $picture_name=date_format( new DateTime(), 'dmYHis' ).uniqid().$_FILES['picture']['name'];
+
+    $picture_bdd='upload/'.$picture_name;
+
+    if(!file_exists('../upload')):
+     mkdir('../upload', 0777, true);
+    endif;
+      copy($_FILES['picture']['tmp_name'], '../'.$picture_bdd);
 
 
-        var_dump($_FILES);
-       die;
     endif;
 
+    // insert en BDD :
 
-    if():
+   $requete= executeRequete("REPLACE INTO product VALUES (:id, :name ,:price, :picture, :description)", array(
+           ':id'=>$_POST['id'],
+           ':name'=>$_POST['name'],
+           ':price'=>$_POST['price'],
+           ':picture'=>$picture_bdd,
+           ':description'=>$_POST['description']
 
-    endif;
+   ));
+
+
 
 
 endif;
@@ -25,7 +42,7 @@ endif;
     <form action="" method="post" enctype="multipart/form-data" >
         <fieldset>
 
-
+            <input type="hidden" name="id" value="0">
             <div class="form-group">
                 <label for="exampleInputEmail1" class="form-label mt-4">Nom</label>
                 <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"

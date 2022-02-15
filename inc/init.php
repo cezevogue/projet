@@ -12,6 +12,12 @@ define('SITE', '/projet/');
 
 $contenu ='';
 
+function debug($var) {
+    echo '<pre>';
+    print_r($var);
+    echo '</pre>';
+}
+
 
 function executeRequete($requete, $param = array()){
   // le parametre $requete recoit une requete sql. Le parametre $param recoit un tableau avec les marqueurs associés à leur valeur
