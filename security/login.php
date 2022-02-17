@@ -9,22 +9,43 @@
      ));
 
 
-     if($resultat->rowCount() == 1):
+     if ($resultat->rowCount() == 1):
 
          $user=$resultat->fetch(PDO::FETCH_ASSOC);
 
          if(password_verify($_POST['password'], $user['password'])):
 
 
+
+
              $_SESSION['user']=$user;
               $_SESSION['messages']['success'][]="Bienvenue ".$user['nickname'];
 
-              header('location:../');
-              die();
 
+              header('location:../');
+              exit();
+
+         else:
+             $_SESSION['messages']['danger'][]="Erreur sur le mot de passe";
+
+             header('location:./login.php');
+             exit();
 
          endif;
 
+     elseif ($resultat->rowCount() == 0):
+
+         $_SESSION['messages']['danger'][]="Aucun compte n'est existant à cette adresse mail";
+
+         header('location:./login.php');
+         exit();
+
+
+     elseif ($resultat->rowCount() > 1):
+         $_SESSION['messages']['danger'][]="Une erreur est survenue, merci de contacter l'administrateur du site";
+
+         header('location:./login.php');
+         exit();
 
      endif;
 

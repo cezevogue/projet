@@ -4,10 +4,11 @@ require_once '../inc/header.php';
 if (!empty($_POST)):
     $mdp= password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    executeRequete("INSERT INTO user (nickname, email, password) VALUES (:nickname, :email, :password)", array(
+    executeRequete("INSERT INTO user (nickname, email, password, roles) VALUES (:nickname, :email, :password, :roles)", array(
             ':nickname'=>$_POST['nickname'],
             ':email'=>$_POST['email'],
-            ':password'=>$mdp
+            ':password'=>$mdp,
+            ':roles'=>'ROLE_USER'
 
     ));
 
