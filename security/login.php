@@ -17,7 +17,7 @@
              debug($user);
              die();
              $_SESSION['user']=$user;
-              $_SESSION['messages']['success'][]="Bienvenue ".$user['pseudo'];
+              $_SESSION['messages']['success'][]="Bienvenue ".$user['nickname'];
 
 
 
