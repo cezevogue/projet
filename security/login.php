@@ -1,8 +1,14 @@
 <?php
  require_once '../inc/header.php';
 
+if (connect()):
+    header('location:../');
+    exit();
+endif;
 
- if(!empty($_POST)):
+
+
+if(!empty($_POST)):
 
      $resultat=executeRequete("SELECT * FROM user WHERE email=:email",array(
              ':email'=>$_POST['email']
@@ -18,7 +24,7 @@
 
 
 
-             $_SESSION['user']=$user;
+              $_SESSION['user']=$user;
               $_SESSION['messages']['success'][]="Bienvenue ".$user['nickname'];
 
 

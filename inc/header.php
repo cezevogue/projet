@@ -54,10 +54,17 @@
                 <input class="form-control me-sm-2" type="text" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
+            <?php  if(!connect()):
+             ?>
             <div class="text-center ">
                 <a href="<?=  SITE.'security/login.php' ; ?>" class="btn btn-success">Se connecter</a>
                 <a href="<?=  SITE.'security/register.php' ; ?>" class="btn btn-primary mt-1">S'inscrire</a>
             </div>
+            <?php  else: ?>
+                <div class="text-center ">
+                    <a href="<?=  SITE.'?unset=1' ; ?>" class="btn btn-primary mt-1">Se déconnecter</a>
+                </div>
+            <?php  endif; ?>
         </div>
     </div>
 </nav>

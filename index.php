@@ -1,6 +1,9 @@
 <?php require_once 'inc/header.php';
 
 
+
+
+
 $resultat= executeRequete("SELECT * FROM product");
 
 $products=$resultat->fetchAll(PDO::FETCH_ASSOC);  // fetchAll() à utiliser systématiquement lorsque l'on a un jeu de résultat supérieur à un

@@ -54,3 +54,24 @@ function executeRequete($requete, $param = array())
 
 
 }
+
+
+function connect(){
+
+    if(isset($_SESSION['user'])):
+        return true;
+    else:
+        return false;
+    endif;
+
+}
+
+function admin(){
+
+    if(connect() && $_SESSION['user']['roles']== 'ROLE_ADMIN'):
+       return true;
+    else:
+        return false;
+    endif;
+
+}

@@ -1,6 +1,11 @@
 <?php
 require_once '../inc/header.php';
 
+if (!admin()):
+    header('location:../');
+    exit();
+endif;
+
 
 if (!empty($_POST)): // si le formulaire a été soumis
 
