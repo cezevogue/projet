@@ -5,6 +5,8 @@ $pdo= new PDO('mysql:host=localhost;dbname=site_ecommerce', 'root','', array(PDO
 // initiation de la session
 session_start();
 
+
+
 // chemin du site
 define('SITE', '/projet/');
 
