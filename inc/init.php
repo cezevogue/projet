@@ -75,3 +75,11 @@ function admin(){
     endif;
 
 }
+
+if (!isset($_SESSION['cart'])):
+    $_SESSION['cart']=[];
+endif;
+
+require_once 'cart.php';
+
+
