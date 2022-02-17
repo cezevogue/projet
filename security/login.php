@@ -8,17 +8,19 @@
              ':email'=>$_POST['email']
      ));
 
+
      if($resultat->rowCount() == 1):
 
          $user=$resultat->fetch(PDO::FETCH_ASSOC);
 
          if(password_verify($_POST['password'], $user['password'])):
 
-             debug($user);
-             die();
+
              $_SESSION['user']=$user;
               $_SESSION['messages']['success'][]="Bienvenue ".$user['nickname'];
 
+              header('location:../');
+              die();
 
 
          endif;
