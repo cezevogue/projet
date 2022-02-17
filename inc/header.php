@@ -29,9 +29,13 @@
 
                     </a>
                 </li>
+                <?php  if(admin()):
+
+               ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= SITE . 'admin/ajoutProduit.php'; ?>">Ajout produit</a>
                 </li>
+                <?php  endif;   ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>

@@ -1,6 +1,10 @@
 <?php require_once 'inc/header.php';
 
-
+if(isset($_GET['unset'])):
+ unset($_SESSION['user']);
+header('location:./');
+exit();
+endif;
 
 
 
@@ -44,8 +48,12 @@ $products=$resultat->fetchAll(PDO::FETCH_ASSOC);  // fetchAll() à utiliser syst
         <h4 class="card-title"><?=  $product['price']; ?> €</h4>
         <p class="card-text text-center"><?=  $product['description']; ?></p>
     </div>
+    <?php  if (admin()): ?>
     <a href="<?=  SITE.'admin/ajoutProduit.php?id='.$product['id']; ?>" class="btn btn-secondary">Modifier</a>
     <a href="?id=<?=  $product['id']; ?>" onclick="return confirm('Etes  vous sûr?')" class="btn btn-danger">Supprimer</a>
+    <?php  else: ?>
+        <a href="" class="btn btn-primary">Ajouter au panier</a>
+    <?php  endif; ?>
 </div>
 
 <?php  endforeach; ?>
