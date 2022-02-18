@@ -27,35 +27,47 @@ if (isset($_GET['destroy'])):
     exit();
 endif;
 
-if(isset($_GET['order'])):
+if (isset($_GET['order'])):
 
-    $resultat=executeRequete("INSERT into orders (date, id_user, amount) VALUES (:date, :id_user, :amount)",array(
-          ':date'=> date_format(new DateTime(), 'Y-m-d'),
-          ':id_user'=>$_SESSION['user']['id'],
-          ':amount'=>getTotal()
+    $resultat = executeRequete("INSERT into orders (date, id_user, amount) VALUES (:date, :id_user, :amount)", array(
+            ':date' => date_format(new DateTime(), 'Y-m-d'),
+            ':id_user' => $_SESSION['user']['id'],
+            ':amount' => getTotal()
 
         )
     );
 // debug($resultat);
 // die();
+    $id = $resultat;
+    foreach (getFullCart() as $item):
+
+        executeRequete("INSERT into details (quantity, id_product, id_orders) VALUES ( :quantity, :id_product, :id_orders)",array(
+             ':quantity'=>$item['quantity'],
+            ':id_product'=>$item['product']['id'],
+            ':id_orders'=>$id
+
+        ));
+         remove($item['product']['id']);
+    endforeach;
+
+    $_SESSION['messages']['success'][]='Merci pour votre achat, consultez le suivi dans votre onglet "Mes commandes"';
+    header('location:../');
+    exit();
+
 
 endif;
 
 
+if (getQuantity() == 0):
 
 
+    ?>
+    <div class="">
+        <h3 class="alert alert-warning text-center align-items-center">Votre panier est vide, allez vite le remplir =>
+            <a class="hover" href="<?= SITE; ?>">Nos Bijoux</a></h3>
+    </div>
 
-
-
-if(getQuantity() ==0):
-
-
-?>
-<div  class="">
-<h3 class="alert alert-warning text-center align-items-center">Votre panier est vide, allez vite le remplir => <a class="hover" href="<?=  SITE ; ?>">Nos Bijoux</a></h3>
-</div>
-
-<?php  else: ?>
+<?php else: ?>
     <div class="d-flex justify-content-end">
         <a href="?destroy=1">
             <button class="btn btn-outline-info btn-rounded mt-3">Vider le panier</button>
@@ -108,11 +120,14 @@ if(getQuantity() ==0):
 
     <div class="mt-3"><h4>Total du panier: <?= $total; ?> €</h4></div>
 
-    <?php  if(connect()): ?>
+    <?php if (connect()): ?>
         <a href="?order=1" class="btn btn-success mt-2">Passer à la commande</a>
-    <?php  else: ?>
-        <a href="<?=  SITE.'security/login.php' ; ?>" onclick="return confirm('Authenfiez-vous pour passer à la commande ')" class="btn btn-success mt-2">Passer à la commande</a>
-  <?php  endif; ?>
+    <?php else: ?>
+        <a href="<?= SITE . 'security/login.php'; ?>"
+           onclick="return confirm('Authenfiez-vous pour passer à la commande ')" class="btn btn-success mt-2">Passer à
+            la commande</a>
+    <?php endif; ?>
 
 
-<?php endif; require_once '../inc/footer.php'; ?>
+<?php endif;
+require_once '../inc/footer.php'; ?>
