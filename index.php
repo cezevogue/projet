@@ -52,6 +52,7 @@ endif;
 
 <div class="row justify-content-between">
     <?php foreach ($products as $product):
+
     $quant=0;
         foreach ($_SESSION['cart'] as $id=>$quantity):
             if ($product['id']==$id):
@@ -60,7 +61,7 @@ endif;
          endforeach;
 
         ?>
-        <div class="card border-secondary mb-3 col-md-4" style="max-width: 20rem;">
+        <div  class="card border-secondary mb-3 col-md-4" style="max-width: 20rem;">
             <div class="card-header text-center">
                 <img width="200" src="<?= $product['picture']; ?>" alt="">
 

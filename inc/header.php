@@ -13,7 +13,9 @@
 </head>
 <body>
 
-<?php require_once 'init.php'; ?>
+<?php require_once 'init.php';
+
+?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <div class="container-fluid">
@@ -54,10 +56,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<?= SITE . 'front/fullCart.php'; ?>">
-                        <button type="button" class="rounded btn btn-primary position-relative p-2 ">
+                        <button type="button" class="rounded btn btn-outline-warning position-relative p-2 ">
                             <i class="fa-solid fa-cart-arrow-down fa-2xl "></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-    99+
+    <?=  getQuantity() ; ?>+
 
   </span>
                         </button>
@@ -72,7 +74,7 @@
                 ?>
                 <div class="text-center ">
                     <a href="<?= SITE . 'security/login.php'; ?>" class="btn btn-success">Se connecter</a>
-                    <a href="<?= SITE . 'security/register.php'; ?>" class="btn btn-primary mt-1">S'inscrire</a>
+                    <a href="<?= SITE . 'security/register.php'; ?>" class="btn btn-primary ">S'inscrire</a>
                 </div>
             <?php else: ?>
                 <div class="text-center ">

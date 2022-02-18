@@ -31,6 +31,7 @@ function remove(int $id)
         $panier[$id]--;
     else:
         unset($panier[$id]);
+        //$panier[$id]=0;
     endif;
     $_SESSION['cart']=$panier;
 
@@ -98,7 +99,14 @@ function getTotal()
 
 function getQuantity()
 {
+    $total=0;
+    foreach (getFullCart() as $item):
 
+        $total += $item['quantity'];
+
+    endforeach;
+
+    return $total;
 
 }
 
