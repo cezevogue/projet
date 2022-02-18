@@ -3,11 +3,35 @@
 $details=getFullCart();
 $total=getTotal();
 
+if(isset($_GET['add'])):
+    add($_GET['add']);
+    header('location:./fullCart.php');
+    exit();
+endif;
+
+if(isset($_GET['remove'])):
+    remove($_GET['remove']);
+    header('location:./fullCart.php');
+    exit();
+endif;
+
+if(isset($_GET['delete'])):
+    delete($_GET['delete']);
+    header('location:./fullCart.php');
+    exit();
+endif;
+
+if(isset($_GET['destroy'])):
+    destroy();
+    header('location:../');
+    exit();
+endif;
+
 
 ?>
+    <a href="?destroy=1"><button class="btn btn-outline-info btn-rounded mt-3" >Vider le panier</button></a>
 
-
-    <table class="table">
+    <table class="table mt-3">
         <thead class="thead-dark text-center">
         <tr>
             <th >Nom</th>
@@ -28,13 +52,13 @@ $total=getTotal();
 
             <td><?=  $item['total'] ; ?> €</td>
             <td>
-                <a href=""><button class="btn btn-primary text-white">-</button></a></td>
+                <a href="?remove=<?=  $item['product']['id'] ; ?>"><button class="btn btn-primary text-white">-</button></a></td>
             <td><?=  $item['quantity'] ; ?></td>
             <td>
-                <a href=""><button class="btn btn-primary text-white">+</button></a></td>
+                <a href="?add=<?=  $item['product']['id'] ; ?>"><button class="btn btn-primary text-white">+</button></a></td>
 
             <td>
-                <a href=""><button class="btn btn-outline-danger btn-rounded" >Annuler</button></a></td>
+                <a href="?delete=<?=  $item['product']['id'] ; ?>"><button class="btn btn-outline-danger btn-rounded" >Annuler</button></a></td>
         </tr>
         <?php  endforeach; ?>
 

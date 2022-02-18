@@ -94,6 +94,11 @@ function getTotal()
     return $total;
 
 
+}
+
+function getQuantity()
+{
+
 
 }
 

@@ -30,19 +30,17 @@
 
                     </a>
                 </li>
-                <?php  if(admin()):
+                <?php if (admin()):
 
-               ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= SITE . 'admin/ajoutProduit.php'; ?>">Ajout produit</a>
-                </li>
-                <?php  endif;   ?>
+                    ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= SITE . 'admin/ajoutProduit.php'; ?>">Ajout produit</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="<?=  SITE.'front/fullCart.php' ; ?>"><i class="fa-solid fa-cart-arrow-down fa-2xl"></i></a>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -54,22 +52,34 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= SITE . 'front/fullCart.php'; ?>">
+                        <button type="button" class="rounded btn btn-primary position-relative p-2 ">
+                            <i class="fa-solid fa-cart-arrow-down fa-2xl "></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+    99+
+
+  </span>
+                        </button>
+                    </a>
+                </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-sm-2" type="text" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <?php  if(!connect()):
-             ?>
-            <div class="text-center ">
-                <a href="<?=  SITE.'security/login.php' ; ?>" class="btn btn-success">Se connecter</a>
-                <a href="<?=  SITE.'security/register.php' ; ?>" class="btn btn-primary mt-1">S'inscrire</a>
-            </div>
-            <?php  else: ?>
+            <?php if (!connect()):
+                ?>
                 <div class="text-center ">
-                    <a href="<?=  SITE.'?unset=1' ; ?>" class="btn btn-primary mt-1"><i class="fa-solid fa-power-off"></i></a>
+                    <a href="<?= SITE . 'security/login.php'; ?>" class="btn btn-success">Se connecter</a>
+                    <a href="<?= SITE . 'security/register.php'; ?>" class="btn btn-primary mt-1">S'inscrire</a>
                 </div>
-            <?php  endif; ?>
+            <?php else: ?>
+                <div class="text-center ">
+                    <a href="<?= SITE . '?unset=1'; ?>" class="btn btn-primary mt-1"><i
+                                class="fa-solid fa-power-off"></i></a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
